@@ -19,7 +19,8 @@ router.post('/signup',function(req,res){
           req.flash('error',err.toString());
           res.redirect('back');//如果注册失败了，跳回注册页
         }else{
-          req.flash('success','用户注册成功，请登录!');
+          req.flash('success','用户注册成功，请登录1!');
+          req.flash('success','用户注册成功，请登录2!');
           res.redirect('/user/signin');//如果注册成功了，跳到登录页
         }
       });
