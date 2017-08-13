@@ -21,12 +21,15 @@ router.get('/signin',function(req,res){
   res.render('user/signin',{title:'用户登录'});
 });
 router.post('/signin',function(req,res){
-  let user = req.body;//{username,password}
+  let user = req.body;//{username,password}得到请求体
+  //查询数据库里有没有跟这个用户用户名和密码相同的用户
   User.findOne(user,function(err,doc){
     if(err){
       res.redirect('back');
     }else{
       if(doc){
+        //把登录成功之后的用户对象写入会话中
+        req.session.user = doc;
         res.redirect('/');
       }else{
         res.redirect('back');
@@ -35,6 +38,8 @@ router.post('/signin',function(req,res){
   });
 });
 router.get('/signout',function(req,res){
-  res.send('退出');
+  //把会话对象中的user属性置为null即意味着退出
+  req.session.user = null;
+  res.redirect('/user/signin');
 });
 module.exports = router;

@@ -1,5 +1,6 @@
 //引入express模块
 let express = require('express');
+let session = require('express-session');
 //首页的路由中间件
 let index = require('./routes/index');
 //用户的路由中间件
@@ -18,6 +19,20 @@ app.set('views',path.resolve('views'));
 app.engine('html',require('ejs').__express);
 //参数是静态文件根目录,当客户端访问服务器的静态文件的时候，此中间件会去静态文件根目录下找这个文件，如果找到则返回客户端，找不到则next
 app.use(express.static(path.resolve('node_modules')));
+//使用session中间件,在请求对象上增加一个req.session属性
+//req.session是当前客户端在服务器对应的会话对象
+
+app.use(session({
+  resave:true,
+  saveUninitialized:true,
+  secret:'zfpx'
+}));
+//此中间件来用来给模板的公共变量赋值
+app.use(function(req,res,next){
+ //把session中的user属性取出赋给模板
+ res.locals.user = req.session.user;
+ next();
+});
 //如果说请求的URL路径是以/开头的，交给index路由中间件处理
 app.use('/',index);
 //如果说请求的URL路径是以/user开头的，交给user路由中间件处理
