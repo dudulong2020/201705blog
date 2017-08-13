@@ -84,3 +84,17 @@ app.use(express.static(path.resolve('upload')));
             <% }%>
 ```
 
+## 发表文章
+1. 编写文章模板
+2. 编写一个Article的Model
+```
+{
+title:String,
+content:String,
+createAt:{type:Date,default:Date.now},
+user:{type:ObjectId,ref:'User'}
+}
+ref表示此外键引用的是User集合的主键
+3. 编写 POST /article/add 路由，在路由里先得到请求体 req.body,然后再加入作者字段，就可以保存到数据库里了。
+
+```
