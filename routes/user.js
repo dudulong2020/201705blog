@@ -19,8 +19,7 @@ router.post('/signup',function(req,res){
           req.flash('error',err.toString());
           res.redirect('back');//如果注册失败了，跳回注册页
         }else{
-          req.flash('success','用户注册成功，请登录1!');
-          req.flash('success','用户注册成功，请登录2!');
+          req.flash('success','用户注册成功，请登录!');
           res.redirect('/user/signin');//如果注册成功了，跳到登录页
         }
       });
@@ -36,13 +35,16 @@ router.post('/signin',function(req,res){
   //查询数据库里有没有跟这个用户用户名和密码相同的用户
   User.findOne(user,function(err,doc){
     if(err){
+      req.flash('error',err.toString());
       res.redirect('back');
     }else{
       if(doc){
+        req.flash('success','恭喜你登录成功!');
         //把登录成功之后的用户对象写入会话中
         req.session.user = doc;
         res.redirect('/');
       }else{
+        req.flash('error','用户名或密码输入错误，请重新输入');
         res.redirect('back');
       }
     }

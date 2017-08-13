@@ -36,7 +36,7 @@ app.use(flash());
 app.use(function(req,res,next){
  //把session中的user属性取出赋给模板
  res.locals.user = req.session.user;
- //req.flash('success')取出来的是一个数组.对象不能在模板里直接渲染，需要转成字符串
+ //req.flash('success')取出来的是一个数组.对象不能在模板里直接渲染，需要转成字符串 res.locals是用来渲染模板的数据对象
  res.locals.success = req.flash('success').toString();
  res.locals.error = req.flash('error').toString();
  next();
