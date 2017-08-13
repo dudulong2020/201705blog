@@ -24,30 +24,37 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <form>
-                <div class="form-group row">
-                    <label class="control-label col-md-2 text-right" for="username">
-                        用户名
-                    </label>
-                    <div class="col-md-10 input-group">
+        <div class="col-xs-8 col-xs-offset-2">
+            <form method="POST">
+                <div class="form-group">
+                    <label class="control-label" for="username">用户名</label>
+                    <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-user"></span>
                         </span>
-                        <input type="text" class="form-control" name="username" id="username">
+                        <input type="text" class="form-control" id="username" name="username">
                     </div>
-                    <div class="form-group">
-                        <div class="checkbox col-md-offset-2 col-md-10">
-                            <label>
-                                <input type="checkbox"> 阅读并同意《用户注册协议》《隐私政策》
-                            </label>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="password">密码</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="password" name="password">
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" class="btn btn-primary">
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="email">邮箱</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input type="text" class="form-control" id="email" name="email">
                     </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary">
                 </div>
             </form>
         </div>
