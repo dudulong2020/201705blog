@@ -1,0 +1,29 @@
+<%include include/header.html%>
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        <form method="POST">
+            <div class="form-group">
+                <label class="control-label" for="username">用户名</label>
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                    <input required type="text" class="form-control" id="username" name="username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="password">密码</label>
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                    <input required type="password" class="form-control" id="password" name="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-info col-xs-12 col-sm-2">
+            </div>
+        </form>
+    </div>
+</div>
+<%include include/footer.html%>
