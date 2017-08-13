@@ -9,13 +9,23 @@ router.get('/signup',function(req,res){
 router.post('/signup',function(req,res){
   let user = req.body;//先得到请求体对象
   //通过create方法把请求体对象保存到数据库里
-  User.create(user,function(err,doc){
-    if(err){
-      res.redirect('back');//如果注册失败了，跳回注册页
+  User.findOne({username:user.username},function(err,oldUser){
+    if(oldUser){//如果找到了跟这次保存的用户名相同的用户，那就是有同名的用户
+      req.flash('error','此用户名已存在，请重新输入');
+      res.redirect('back');
     }else{
-      res.redirect('/user/signin');//如果注册成功了，跳到登录页
+      User.create(user,function(err,doc){
+        if(err){
+          req.flash('error',err.toString());
+          res.redirect('back');//如果注册失败了，跳回注册页
+        }else{
+          req.flash('success','用户注册成功，请登录!');
+          res.redirect('/user/signin');//如果注册成功了，跳到登录页
+        }
+      });
     }
   });
+
 });
 router.get('/signin',function(req,res){
   res.render('user/signin',{title:'用户登录'});

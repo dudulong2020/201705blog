@@ -1,6 +1,8 @@
 //引入express模块
 let express = require('express');
 let session = require('express-session');
+//这是一个消息中间件,此中间件负责向session中读写消息
+let flash = require('connect-flash');
 //首页的路由中间件
 let index = require('./routes/index');
 //用户的路由中间件
@@ -21,12 +23,15 @@ app.engine('html',require('ejs').__express);
 app.use(express.static(path.resolve('node_modules')));
 //使用session中间件,在请求对象上增加一个req.session属性
 //req.session是当前客户端在服务器对应的会话对象
-
+//req.session
 app.use(session({
   resave:true,
   saveUninitialized:true,
   secret:'zfpx'
 }));
+//使用了此中间件之后，
+// req.flash(type,msg) 写入一个消息  req.flash(type); 读一个消息,并且销毁消息，这表示写入的消息只能读取一个
+app.use(flash());
 //此中间件来用来给模板的公共变量赋值
 app.use(function(req,res,next){
  //把session中的user属性取出赋给模板
