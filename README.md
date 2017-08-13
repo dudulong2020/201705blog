@@ -60,4 +60,5 @@ user.avatar = `/${req.file.filename}`;
 ```
 app.use(express.static(path.resolve('upload')));
 ```
+8.在页面上显示头像
 
