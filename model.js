@@ -21,6 +21,7 @@ let ArticleSchema = new mongoose.Schema({
   content:String,
   createAt:{type:Date,default:Date.now},
   //表示作者，对应一个用户, ref的是当前的外键引用的是哪个集合的主键 ，把那个集合的模型名称放在此即可，大小写也要对应上
-  user:{type:ObjectId,ref:'User'}
+  user:{type:ObjectId,ref:'User'},
+  pv:{type:Number,default:0}
 })
 exports.Article = conn.model('Article',ArticleSchema);

@@ -15,9 +15,42 @@
                     <p>
                         <%=article.content%>
                     </p>
+                    <p>
+                        作者:<%=article.user.username%>|
+                        发表时间:<%=article.createAt.toLocaleString()%>|
+                        阅读量:<%=article.pv%>
+                    </p>
                 </div>
             </div>
         <%})%>
+        <nav>
+            <ul class="pagination">
+                <%
+                if(pageNum>1){%>
+                <li>
+                    <a href="/?pageNum=<%=pageNum-1%>&pageSize=<%=pageSize%>&keyword=<%=keyword%>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <%}
+                %>
+
+                <%
+                  for(let i=1;i<=totalPages;i++){%>
+                    <li class="<%=pageNum==i?'active':''%>"><a href="/?pageNum=<%=i%>&pageSize=<%=pageSize%>&keyword=<%=keyword%>"><%=i%></a></li>
+                  <%}
+                %>
+                <%if(pageNum<totalPages){%>
+                <li>
+                    <a href="/?pageNum=<%=pageNum+1%>&pageSize=<%=pageSize%>&keyword=<%=keyword%>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <%}
+                %>
+
+            </ul>
+        </nav>
     </div>
 </div>
 <%include include/footer.html%>

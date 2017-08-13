@@ -45,6 +45,7 @@ app.use(function(req,res,next){
  //req.flash('success')取出来的是一个数组.对象不能在模板里直接渲染，需要转成字符串 res.locals是用来渲染模板的数据对象
  res.locals.success = req.flash('success').toString();
  res.locals.error = req.flash('error').toString();
+ res.locals.keyword = '';
  next();
 });
 //如果说请求的URL路径是以/开头的，交给index路由中间件处理
