@@ -62,11 +62,17 @@ app.use(express.static(path.resolve('upload')));
 ```
 8.在页面上显示头像
 ```
+   .avatar{
+            width:23px;
+            height:23px;
+            border-radius: 5px;
+        }
+
  <%if(user){%>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
-                        <img src="<%=user.avatar%>">
+                        <img class="avatar" src="<%=user.avatar%>">
                     </a>
                 </li>
                 <li>
