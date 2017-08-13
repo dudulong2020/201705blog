@@ -1,4 +1,5 @@
 let express = require('express');
+let {User} = require('../model');
 let router = express.Router();
 router.get('/signup',function(req,res){
   //渲染模板 1参数是相对路径
@@ -6,8 +7,15 @@ router.get('/signup',function(req,res){
 });
 //用户注册 1.获取请求体 2. 把这个对象保存到数据库中
 router.post('/signup',function(req,res){
-  let user = req.body;
-
+  let user = req.body;//先得到请求体对象
+  //通过create方法把请求体对象保存到数据库里
+  User.create(user,function(err,doc){
+    if(err){
+      res.redirect('back');//如果注册失败了，跳回注册页
+    }else{
+      res.redirect('/user/signin');//如果注册成功了，跳到登录页
+    }
+  });
 });
 router.get('/signin',function(req,res){
   res.send('登录');
