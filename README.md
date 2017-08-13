@@ -29,5 +29,5 @@ npm install express mongoose body-parser express-session connect-mongo connect-f
 |提交用户登录表单|POST|/user/signin|
 |用户退出|GET|/user/signout|
 
-
+### 注册功能
 
