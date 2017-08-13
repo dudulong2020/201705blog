@@ -18,4 +18,10 @@ router.post('/add',function(req,res){
      }
   })
 });
+router.get('/detail/:_id',function(req,res){
+  let _id = req.params._id;//先得到路径参数
+  Article.findById(_id,function(err,article){//根据文章的ID查找文章的对象
+      res.render('article/detail',{title:'文章详情',article});
+  })
+});
 module.exports = router;
