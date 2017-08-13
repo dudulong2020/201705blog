@@ -24,4 +24,16 @@ router.get('/detail/:_id',function(req,res){
       res.render('article/detail',{title:'文章详情',article});
   })
 });
+router.get('/delete/:_id',function(req,res){
+  let _id = req.params._id;
+  Article.remove({_id},function(err,result){
+    res.redirect('/');
+  });
+});
+router.get('/edit/:_id',function(req,res){
+  let _id = req.params._id;
+  Article.findById(_id,function(err,article){
+    res.render('article/add',{title:'编辑文章',article});
+  })
+});
 module.exports = router;
