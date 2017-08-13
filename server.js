@@ -1,6 +1,7 @@
 //引入express模块
 let express = require('express');
 let session = require('express-session');
+let Mongodb = require('connect-mongo')(session);
 //这是一个消息中间件,此中间件负责向session中读写消息
 let flash = require('connect-flash');
 //首页的路由中间件
@@ -29,7 +30,10 @@ app.use(express.static(path.resolve('upload')));
 app.use(session({
   resave:true,
   saveUninitialized:true,
-  secret:'zfpx'
+  secret:'zfpx',
+  store:new Mongodb({//指定session的存放位置
+    url:'mongodb://127.0.0.1/201705blog'
+  })
 }));
 //使用了此中间件之后，
 // req.flash(type,msg) 写入一个消息  req.flash(type); 读一个消息,并且销毁消息，这表示写入的消息只能读取一个

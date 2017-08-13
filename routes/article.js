@@ -2,7 +2,7 @@ let express = require('express');
 let {Article} = require('../model');
 let router = express.Router();
 router.get('/add',function(req,res){
-  res.render('article/add',{title:'发表文章'});
+  res.render('article/add',{title:'发表文章',article:{}});
 });
 router.post('/add',function(req,res){
   let article = req.body;
@@ -35,5 +35,11 @@ router.get('/edit/:_id',function(req,res){
   Article.findById(_id,function(err,article){
     res.render('article/add',{title:'编辑文章',article});
   })
+});
+router.post('/edit/:_id',function(req,res){
+  let _id = req.params._id;
+  Article.update({_id},req.body,function(err,result){
+     res.redirect(`/article/detail/${_id}`);
+  });
 });
 module.exports = router;
