@@ -5,8 +5,11 @@ let index = require('./routes/index');
 //用户的路由中间件
 let user = require('./routes/user');
 let path = require('path');
+let bodyParser = require('body-parser');
 //执行express方法得到app函数
 let app = express();
+//使用bodyparser中间件，得到请求体 req.body
+app.use(bodyParser.urlencoded({extended:true}));
 //设置模板引擎
 app.set('view engine','html');
 //设置模板的存放路径
