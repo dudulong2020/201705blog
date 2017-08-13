@@ -6,6 +6,8 @@ router.get('/add',function(req,res){
 });
 router.post('/add',function(req,res){
   let article = req.body;
+  //给user赋值
+  article.user = req.session.user._id;
   Article.create(article,function(err,doc){
      if(err){
        req.flash('error',err.toString());

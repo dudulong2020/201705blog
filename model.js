@@ -1,5 +1,7 @@
 //1.引入mongoose
 let mongoose = require('mongoose');
+//用ES6自带的promise替代掉mongoose自已废弃的promise库
+mongoose.Promise = Promise;
 let ObjectId = mongoose.Schema.Types.ObjectId;
 //2.连接数据库 conn是返回的连接对象
 let conn = mongoose.createConnection('mongodb://127.0.0.1/201705blog');
