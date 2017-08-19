@@ -23,9 +23,9 @@ router.post('/add',function(req,res){
 router.get('/detail/:_id',function(req,res){
   let _id = req.params._id;//先得到路径参数
   Article.update({_id},{$inc:{pv:1}},function(){
-    Article.findById(_id,function(err,article){//根据文章的ID查找文章的对象
+    Article.findById(_id).populate('comments.user').exec(function(err,article){//根据文章的ID查找文章的对象
       res.render('article/detail',{title:'文章详情',article});
-    })
+    });
   });
 });
 router.get('/delete/:_id',function(req,res){

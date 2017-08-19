@@ -8,14 +8,41 @@
             <div class="panel-body">
                 <%=article.content%>
             </div>
-            <%
-              if(user && user._id == article.user){%>
+            <%if(user && user._id == article.user){%>
             <div class="panel-footer">
                 <a class="btn btn-warning" href="/article/edit/<%=article._id%>">编辑</a>
                 <a class="btn btn-danger" href="/article/delete/<%=article._id%>">删除</a>
             </div>
             <%}%>
+        </div>
 
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <%article.comments.forEach(function(comment){%>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="">
+                                <img  class="avatar media-object" src="<%=comment.user.avatar%>" alt="">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <p><%=comment.content%></p>
+                            <p>作者:<%=comment.user.username%> |发表时间:<%=comment.createAt.toLocaleString()%></p>
+                        </div>
+                    </div>
+                <%})%>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form action="/comment/add?articleId=<%=article._id%>" method="post">
+                    <div class="form-group">
+                        <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary">
+                </form>
+            </div>
         </div>
     </div>
 </div>

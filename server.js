@@ -9,6 +9,7 @@ let index = require('./routes/index');
 //用户的路由中间件
 let user = require('./routes/user');
 let article = require('./routes/article');
+let comment = require('./routes/comment');
 let category = require('./routes/category');//分类
 let path = require('path');
 let bodyParser = require('body-parser');
@@ -55,5 +56,6 @@ app.use('/',index);
 app.use('/user',user);
 app.use('/article',article);
 app.use('/category',category);
+app.use('/comment',comment);
 //监听8080端口，启动http服务器
 app.listen(8080);
