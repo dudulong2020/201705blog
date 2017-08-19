@@ -9,6 +9,7 @@ let index = require('./routes/index');
 //用户的路由中间件
 let user = require('./routes/user');
 let article = require('./routes/article');
+let category = require('./routes/category');//分类
 let path = require('path');
 let bodyParser = require('body-parser');
 //执行express方法得到app函数
@@ -53,5 +54,6 @@ app.use('/',index);
 //如果说请求的URL路径是以/user开头的，交给user路由中间件处理
 app.use('/user',user);
 app.use('/article',article);
+app.use('/category',category);
 //监听8080端口，启动http服务器
 app.listen(8080);

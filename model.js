@@ -25,3 +25,8 @@ let ArticleSchema = new mongoose.Schema({
   pv:{type:Number,default:0}
 })
 exports.Article = conn.model('Article',ArticleSchema);
+
+let CategorySchema = new mongoose.Schema({
+  name:String
+});
+exports.Category = conn.model('Category',CategorySchema);
