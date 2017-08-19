@@ -1,8 +1,10 @@
 let express = require('express');
-let {Article} = require('../model');
+let {Article,Category} = require('../model');
 let router = express.Router();
 router.get('/add',function(req,res){
-  res.render('article/add',{title:'发表文章',article:{}});
+  Category.find({},function(err,categories){
+    res.render('article/add',{title:'发表文章',categories,article:{}});
+  });
 });
 router.post('/add',function(req,res){
   let article = req.body;
@@ -34,9 +36,10 @@ router.get('/delete/:_id',function(req,res){
 });
 router.get('/edit/:_id',function(req,res){
   let _id = req.params._id;
-  Article.findById(_id,function(err,article){
-    res.render('article/add',{title:'编辑文章',article});
-  })
+  Promise.all([Article.findById(_id),Category.find({})]).then(function(result){
+    console.log(result);
+    res.render('article/add',{title:'编辑文章',article:result[0],categories:result[1]});
+  });
 });
 router.post('/edit/:_id',function(req,res){
   let _id = req.params._id;

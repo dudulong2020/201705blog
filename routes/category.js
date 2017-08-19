@@ -17,4 +17,10 @@ router.post('/add', function (req, res) {
     res.redirect('/category/list');
   })
 });
+router.get('/delete/:_id',function(req,res){
+  let _id = req.params._id;
+  Category.remove({_id},function(err,result){
+    res.redirect('/category/list');
+  });
+});
 module.exports = router;
