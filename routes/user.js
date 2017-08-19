@@ -17,6 +17,7 @@ router.post('/signup',upload.single('avatar'),function(req,res){
   //   /6ed1f5e1aa76bcbf24b1f067c5cce71e
   //这个路径其实是upload目录的子路径，只需要把upload目录作为静态文件根目录，就可以通过 /文件名返回这个文件的内容
   user.avatar = `/${req.file.filename}`;
+  user.password = require('crypto').createHash('md5').update(user.password).digest('hex');
   //通过create方法把请求体对象保存到数据库里
   User.findOne({username:user.username},function(err,oldUser){
     if(oldUser){//如果找到了跟这次保存的用户名相同的用户，那就是有同名的用户
@@ -42,6 +43,7 @@ router.get('/signin',function(req,res){
 router.post('/signin',function(req,res){
   let user = req.body;//{username,password}得到请求体
   //查询数据库里有没有跟这个用户用户名和密码相同的用户
+  user.password = require('crypto').createHash('md5').update(user.password).digest('hex');
   User.findOne(user,function(err,doc){
     if(err){
       req.flash('error',err.toString());

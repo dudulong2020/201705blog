@@ -18,6 +18,7 @@ exports.User = conn.model('User',UserSchema);
 //_id的类型就是ObjectId
 let ArticleSchema = new mongoose.Schema({
   title:String,
+  order:{type:Number,default:0},
   content:String,
   category:{type:ObjectId,ref:'Category'},
   createAt:{type:Date,default:Date.now},
